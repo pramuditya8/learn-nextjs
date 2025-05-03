@@ -4,7 +4,6 @@ export function GET(request: Request) {
     const {searchParams} = new URL(request.url)
     console.log(searchParams.get("name"))
     return NextResponse.json({message: "Hello"}, {status: 200})
-    
 }
 
 export async function POST(request: Request) {
