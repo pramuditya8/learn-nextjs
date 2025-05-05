@@ -1,3 +1,5 @@
+import CreateForm from './create'
+
 async function getNotes() {
   const notes = await fetch('https://service.pace11.my.id/api/notes').then(
     (res) => res.json(),
@@ -18,9 +20,15 @@ export default async function Notes() {
 
   return (
     <>
-      {notes.data.map((el: ListNotes) => (
-        <li key={el.id}>{el.title}</li>
-      ))}
+      <CreateForm />
+      <div className="grid grid-cols-4 gap-4">
+        {notes.data.map((el: ListNotes) => (
+          <div key={el.id} className="p-4 bg-white shadow-sm rounded-lg">
+            <h1>{el.title}</h1>
+            <p>{el.description}</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
