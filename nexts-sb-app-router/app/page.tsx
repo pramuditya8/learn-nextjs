@@ -1,7 +1,13 @@
+'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useCount } from '@/context'
+import { dataStore } from '@/store/dataStore'
 
 export default function Home() {
+  const { count, setCount } = useCount()
+  const { inc } = dataStore()
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -15,6 +21,8 @@ export default function Home() {
           height={38}
           priority
         />
+        <button onClick={() => setCount(count + 1)}>Count++ (Context)</button>
+        <button onClick={() => inc()}>Count++ (Zustand)</button>
       </main>
       <footer className={styles.footer}>
         <a

@@ -1,19 +1,25 @@
+'use client'
 import Head from 'next/head'
 import { Geist, Geist_Mono } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import { useCount } from '@/context'
+import { dataStore } from '@/store/dataStore'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
+// const geistSans = Geist({
+//   variable: '--font-geist-sans',
+//   subsets: ['latin'],
+// })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+// const geistMono = Geist_Mono({
+//   variable: '--font-geist-mono',
+//   subsets: ['latin'],
+// })
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
+  const { count } = useCount()
+  const { countZustand } = dataStore()
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -31,6 +37,10 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main className="flex-1 container mx-auto p-4">
+          <div>
+            <p>{`Count (Context): ${count}`}</p>
+            <p>{`Count (Zustand): ${countZustand}`}</p>
+          </div>
           <div>{children}</div>
         </main>
         <footer className="bg-gray-800 text-white p-4 text-center">
